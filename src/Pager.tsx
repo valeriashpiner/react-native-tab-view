@@ -5,6 +5,7 @@ import {
   Keyboard,
   I18nManager,
   InteractionManager,
+  Platform
 } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import Animated, {
@@ -783,7 +784,7 @@ export default class Pager<T extends Route> extends React.Component<
           simultaneousHandlers={this.state.childPanGestureHandlerRefs}
           waitFor={this.state.childPanGestureHandlerRefs}
           enabled={layout.width !== 0 && swipeEnabled && this.state.enabled}
-          onGestureEvent={this.handleGestureEvent}
+          onGestureEvent={Platform.OS === 'ios' ? this.handleGestureEvent : undefined}
           onHandlerStateChange={this.handleGestureEvent}
           activeOffsetX={[-SWIPE_DISTANCE_MINIMUM, SWIPE_DISTANCE_MINIMUM]}
           failOffsetY={[-SWIPE_DISTANCE_MINIMUM, SWIPE_DISTANCE_MINIMUM]}
